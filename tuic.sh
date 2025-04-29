@@ -20,7 +20,8 @@ else
 fi
 
 # 获取 TUIC 最新版本号
-LATEST_VER=$(curl -s https://api.github.com/repos/EAimTY/tuic/releases/latest | grep tag_name | cut -d '"' -f4)
+LATEST_VER=$(curl -s https://api.github.com/repos/Itsusinn/tuic/releases/latest | grep tag_name | cut -d '"' -f4)
+
 if [ -z "$LATEST_VER" ]; then
   echo "无法获取 TUIC 最新版本"
   exit 1
