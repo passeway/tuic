@@ -69,7 +69,7 @@ cat > /opt/tuic/config.json <<EOF
     "congestion_control": "bbr",
     "alpn": ["h3", "spdy/3.1"],
     "udp_relay_ipv6": true,
-    "zero_rtt_handshake": false
+    "zero_rtt_handshake": false,
     "auth_timeout": "3s",
     "max_idle_time": "10s",
     "max_external_packet_size": 1500,
@@ -109,7 +109,7 @@ IP_COUNTRY=$(curl -s http://ipinfo.io/${HOST_IP}/country)
 
 # 生成客户端配置文本
 cat > /opt/tuic/config.txt <<EOF
-TUIC V5 = tuic, $HOST_IP, $RANDOM_PORT, skip-cert-verify=true, sni=www.bing.com, uuid=$UUID, alpn=h3, password=$RANDOM_PSK, version=5
+$IP_COUNTRY = tuic, $HOST_IP, $RANDOM_PORT, skip-cert-verify=true, sni=www.bing.com, uuid=$UUID, alpn=h3, password=$RANDOM_PSK, version=5
 EOF
 # 输出客户端配置文本
 cat /opt/tuic/config.txt
