@@ -69,6 +69,12 @@ cat > /opt/tuic/config.json <<EOF
     "alpn": ["h3", "spdy/3.1"],
     "udp_relay_ipv6": true,
     "zero_rtt_handshake": false
+    "auth_timeout": "3s",
+    "max_idle_time": "10s",
+    "max_external_packet_size": 1500,
+    "gc_interval": "3s",
+    "gc_lifetime": "15s",
+    "log_level": "warn"
 }
 EOF
 
