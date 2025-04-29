@@ -30,10 +30,10 @@ fi
 # 创建安装目录
 mkdir -p /opt/tuic
 
-# 下载 TUIC 服务端
-echo "正在下载 tuic-server ($ARCH_NAME)..."
-wget -qO /opt/tuic/tuic-server "https://github.com/EAimTY/tuic/releases/download/${LATEST_VER}/tuic-server-${ARCH_NAME}-linux"
+# 下载 tuic-server
+wget -q --show-progress -O /opt/tuic/tuic-server "https://github.com/Itsusinn/tuic/releases/download/${LATEST_VER}/tuic-server-${ARCH_NAME}-linux" || { echo "下载失败！"; exit 1; }
 chmod +x /opt/tuic/tuic-server
+
 
 # 生成随机端口号并检查是否被占用
 while true; do
