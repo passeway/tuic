@@ -48,7 +48,7 @@ done
 
 # 生成 UUID 和随机密码
 UUID=$(cat /proc/sys/kernel/random/uuid)
-RANDOM_PSK=$(openssl rand -base64 12)
+RANDOM_PSK=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 12)
 
 # 生成自签证书
 openssl req -x509 -nodes -newkey ec:<(openssl ecparam -name prime256v1) \
@@ -109,25 +109,7 @@ IP_COUNTRY=$(curl -s http://ipinfo.io/${HOST_IP}/country)
 
 # 生成客户端配置文本
 cat > /opt/tuic/config.txt <<EOF
-{
-    "server": "$HOST_IP",
-    "server_port": $RANDOM_PORT,
-    "uuid": "$UUID",
-    "password": "$RANDOM_PSK",
-    "congestion_control": "bbr",
-    "alpn": ["h3", "spdy/3.1"],
-    "disable_sni": false,
-    "enable_0rtt": false,
-    "tls": {
-        "enabled": true,
-        "insecure": true,
-        "server_name": "www.bing.com"
-    },
-    "udp_relay_mode": "native",
-    "max_external_packet_size": 1500,
-    "local_address": "127.0.0.1",
-    "local_port": 1080
-}
+echo "tuic://${UUID}:${RANDOM_PSK}@${HOST_IP}:${RANDOM_PORT}?skip-cert-verify=true&sni=${SNI}&alpn=h3&congestion_control=bbr#$IP_COUNTRY"
 
 $IP_COUNTRY = tuic, $HOST_IP, $RANDOM_PORT, skip-cert-verify=true, sni=www.bing.com, uuid=$UUID, alpn=h3, password=$RANDOM_PSK, version=5
 EOF
