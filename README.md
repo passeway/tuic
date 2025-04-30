@@ -4,7 +4,8 @@ bash <(curl -fsSL https://raw.githubusercontent.com/passeway/tuic/main/tuic.sh)
 ```
 ## 一键卸载
 ```
-systemctl stop tuic && systemctl disable --now tuic.service && rm -rf /opt/tuic
+systemctl disable --now tuic && rm -rf /opt/tuic && rm -f /etc/systemd/system/tuic.service && systemctl daemon-reload
+
 ```
 ## 常用指令
 | 命令 | 说明 |
