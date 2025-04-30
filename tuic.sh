@@ -109,7 +109,7 @@ IP_COUNTRY=$(curl -s http://ipinfo.io/${HOST_IP}/country)
 
 # 生成客户端配置文本
 cat > /opt/tuic/config.txt <<EOF
-echo "tuic://${UUID}:${RANDOM_PSK}@${HOST_IP}:${RANDOM_PORT}?skip-cert-verify=true&sni=${SNI}&alpn=h3&congestion_control=bbr#$IP_COUNTRY"
+tuic://$UUID%$RANDOM_PSK@ $HOST_IP:$RANDOM_PORT?sni=www.bing.com&alpn=h3&congestion_control=bbr#$IP_COUNTRY
 
 $IP_COUNTRY = tuic, $HOST_IP, $RANDOM_PORT, skip-cert-verify=true, sni=www.bing.com, uuid=$UUID, alpn=h3, password=$RANDOM_PSK, version=5
 EOF
