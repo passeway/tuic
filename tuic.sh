@@ -38,7 +38,7 @@ chmod +x /opt/tuic/tuic-server
 # 生成随机端口号并检查是否被占用
 while true; do
     RANDOM_PORT=$(shuf -i 50000-55000 -n 1)
-    if ! lsof -i:$RANDOM_PORT > /dev/null; then
+    if ! ss -tuln | grep -q ":$RANDOM_PORT "; then
         echo "Selected port: $RANDOM_PORT"
         break
     else
@@ -104,7 +104,7 @@ systemctl enable --now tuic.service
 
 
 # 获取本机 IP 和国家
-HOST_IP=$(curl -s http://checkip.amazonaws.com)
+HOST_IP=$(curl -s https://checkip.amazonaws.com || curl -s https://icanhazip.com)
 IP_COUNTRY=$(curl -s http://ipinfo.io/${HOST_IP}/country)
 
 # 生成客户端配置文本
