@@ -80,7 +80,7 @@ cat > /opt/tuic/config.json <<EOF
 EOF
 
 # 写入 systemd 服务
-cat > /lib/systemd/system/tuic.service <<EOF
+cat > /etc/systemd/system/tuic.service <<EOF
 [Unit]
 Description=Delicately-TUICed high-performance proxy built on top of the QUIC protocol
 Documentation=https://github.com/EAimTY/tuic
